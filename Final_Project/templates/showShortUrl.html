@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block title %}URL Shortener{% endblock %}
+
+{% block content %}
+<center>
+    <h3>URL Shortener</h3>
+</center>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    function copyFunction(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>
+
+<center>
+    <br>
+    <div class="maindiv">
+        <form action="/" , method="post">
+            <label for="url_link">Please Enter the URL</label>
+            <br><br>
+            <input type="url" name="act_url" id="act_url" placeholder="Enter Your URL" size="50">
+            <br><br>
+            <input type="submit" value="Short URL" class="btn btn-primary">
+        </form>
+        <br>
+        {% if short_url_print %}
+        <hr>
+        <h5>Your Short URL is : </h5>
+        <br>
+        <p style="background-color: aqua" id="shortUrl">http://127.0.0.1:5000/{{short_url_print}}</p>
+        <button class="btn btn-warning" onclick="copyFunction('#shortUrl')">Copy URL</button>
+    </div>
+
+    {% endif %}
+</center>
+{% endblock %}
